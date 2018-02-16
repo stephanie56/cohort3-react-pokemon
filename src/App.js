@@ -1,41 +1,44 @@
 import React, { Component } from 'react';
 
-import pokeBallImage from './images/pokeball.png';
+import { Header } from './components/Header';
+import { SearchBar } from './components/SearchBar';
+import { PokemonCard } from './components/PokemonCard';
 
-const Header = ({ title }) => <header>{ title }</header>;
-
-const SearchBar = (props) => {
-  return(
-    <form>
-      <input type="text" />
-      <input type="submit" value="Fetch a Pokemon!" />
-    </form>
-  );
-};
-
-const PokemonCard = ({ name, imgSrc }) => {
-  return (
-    <div className="Pokemon">
-      <img className="Pokemon__image"
-        src={imgSrc}
-        alt={name} />
-      <h1>{name}</h1>
-    </div>
-  );
-}
-
-PokemonCard.defaultProps = {
-  name: 'No Pokemon Around',
-  imgSrc: pokeBallImage
-};
 
 export default class App extends Component {
+  constructor(){
+    super();
+    this.state = {
+      searchTerm: '',
+      name: '',
+      imgUrl: ''
+    }
+  }
+
+  componentDidMount(){
+    const data = fetch('https://pokeapi.co/api/v2/pokemon/25/')
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      const pokemonName = data.name;
+      const pokemonImage = data.sprites.front_default;
+      this.setState({
+        name: pokemonName,
+        imgUrl: pokemonImage
+      });
+
+    });
+  }
+
   render() {
     return (
       <div className="App">
         <Header title={"Gotta Fetch em all!"}/>
         <SearchBar />
-        <PokemonCard />
+        <PokemonCard
+          name={this.state.name}
+          imgSrc={this.state.imgUrl}
+        />
       </div>
     );
   }

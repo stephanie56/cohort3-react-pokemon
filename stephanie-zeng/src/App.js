@@ -11,13 +11,21 @@ export default class App extends Component {
   constructor(){
     super();
     this.state = {
-      searchTerm: 'pikach',
+      searchTerm: '',
       pokeName: '',
       pokeImage: ''
     }
   }
 
-  componentDidMount(){
+  updateSearchTerm = (e) => {
+    console.log(e.target.value);
+    this.setState({
+      searchTerm: e.target.value
+    });
+  }
+
+  submitSearchTerm = (e) => {
+    e.preventDefault();
     const pokemonName = this.state.searchTerm.toLowerCase();
     const data = fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
     .then(res => res.json())
@@ -39,16 +47,12 @@ export default class App extends Component {
     });
   }
 
-  submitSearchTerm = (e, val) => {
-    e.preventDefault();
-    console.log(val);
-  }
-
   render() {
     return (
       <div className="App">
         <Header title={"Gotta Fetch em all!"}/>
         <SearchBar
+          updateSearchTerm={this.updateSearchTerm}
           submitSearchTerm={this.submitSearchTerm}
         />
         <PokemonCard

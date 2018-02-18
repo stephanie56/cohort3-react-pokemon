@@ -5,9 +5,9 @@ img {
 .Pokemon {
   width: 300px;
   height:500px;
-}
 
-.Pokemon__image {
-  background-color: #eee;
-  border-radius: 4px;
+  &__image {
+    background-color: #eee;
+    border-radius: 4px;
+  }
 }

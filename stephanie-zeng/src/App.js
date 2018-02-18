@@ -6,7 +6,6 @@ import { PokemonCard } from './components/PokemonCard';
 
 import pokeBall from './images/pokeball.png';
 
-
 export default class App extends Component {
   constructor(){
     super();

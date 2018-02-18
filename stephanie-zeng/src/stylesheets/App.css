@@ -1,9 +1,49 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+body {
+  font-family: Helvetica, 'Roboto', Arial, sans-serif;
+  color: #777; }
+
 img {
   width: 100%; }
 
+.Header {
+  background-color: #E24D51;
+  color: #eee;
+  margin: 0;
+  padding: 1rem;
+  text-align: center; }
+  .Header h1 {
+    font-size: 2rem;
+    font-weight: lighter; }
+
+.SearchBar {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem; }
+  .SearchBar input {
+    padding: 0.4rem;
+    outline: none; }
+  .SearchBar input[type="text"] {
+    flex: 2;
+    margin-right: 0.6rem;
+    border-color: #777;
+    border-width: 2px; }
+  .SearchBar input[type="submit"] {
+    flex: 1;
+    background-color: #E24D51;
+    color: #eee;
+    border-color: #E24D51;
+    border-radius: 4px;
+    cursor: pointer; }
+
 .Pokemon {
-  width: 300px;
-  height: 500px; }
+  max-width: 400px;
+  text-align: center;
+  margin: 0 auto; }
+  .Pokemon h1 {
+    font-size: 1.4rem; }
   .Pokemon__image {
     background-color: #eee;
     border-radius: 4px; }

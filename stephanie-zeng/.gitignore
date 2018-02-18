@@ -6,6 +6,9 @@ node_modules/
 # testing
 /coverage
 
+# styles
+src/**/*.css
+
 # production
 /build
 

@@ -4,5 +4,7 @@ import './stylesheets/App.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
+import 'normalize.css';
+
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();

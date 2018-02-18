@@ -1,13 +1,70 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+$theme-red: #E24D51;
+$theme-white: #eee;
+$theme-grey: #777;
+
+body {
+  font-family: Helvetica, 'Roboto', Arial, sans-serif;
+  color: $theme-grey;
+}
+
 img {
   width: 100%;
 }
 
+.Header {
+  background-color: $theme-red;
+  color: $theme-white;
+  margin: 0;
+  padding: 1rem;
+  text-align: center;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: lighter;
+  }
+}
+
+.SearchBar {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+
+  input {
+    padding: 0.4rem;
+    outline: none;
+  }
+
+  input[type="text"] {
+    flex: 2;
+    margin-right: 0.6rem;
+    border-color: $theme-grey;
+    border-width: 2px;
+  }
+
+  input[type="submit"]{
+    flex: 1;
+    background-color: $theme-red;
+    color: $theme-white;
+    border-color: $theme-red;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+}
+
 .Pokemon {
-  width: 300px;
-  height:500px;
+  max-width: 400px;
+  text-align: center;
+  margin: 0 auto;
+
+  h1 {
+    font-size: 1.4rem;
+  }
 
   &__image {
-    background-color: #eee;
+    background-color: $theme-white;
     border-radius: 4px;
   }
 }

@@ -14,7 +14,8 @@ export default class App extends Component {
     this.state = {
       searchTerm: '',
       pokeName: 'No Pokémon Around',
-      pokeImage: pokeBall
+      pokeImage: pokeBall,
+      isLoading: false
     }
   }
 
@@ -26,6 +27,7 @@ export default class App extends Component {
 
   submitSearchTerm = () => {
     const pokemonName = this.state.searchTerm.toLowerCase();
+    this.setState({ isLoading: true });
     fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
     .then(res => res.json())
     .then(pokemon => {
@@ -33,13 +35,15 @@ export default class App extends Component {
       const pokeImage = pokemon.sprites.front_default;
       this.setState({
         pokeName,
-        pokeImage
+        pokeImage,
+        isLoading: false
       });
     })
     .catch(err => {
       this.setState({
         pokeName: "Pokémon Not Found",
-        pokeImage: pokeBall
+        pokeImage: pokeBall,
+        isLoading: false
       });
     });
   }
@@ -55,6 +59,7 @@ export default class App extends Component {
         <PokemonCard
           pokeName={this.state.pokeName}
           pokeImage={this.state.pokeImage}
+          isLoading={this.state.isLoading}
         />
       <Footer credit={"Gotta Fetch 'em All Assignment / Coded by Stephanie Zeng"}/>
       </div>

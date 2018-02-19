@@ -57,7 +57,7 @@ img {
   }
 }
 
-.Pokemon {
+.Card {
   max-width: 400px;
   text-align: center;
   margin: 0 auto;
@@ -65,6 +65,15 @@ img {
 
   h1 {
     font-size: 1.4rem;
+  }
+
+  &__msg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    font-size: 1.4rem;
+    color: $theme-red;
   }
 
   &__image {

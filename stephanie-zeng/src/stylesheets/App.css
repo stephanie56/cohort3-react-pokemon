@@ -40,14 +40,21 @@ img {
     border-radius: 4px;
     cursor: pointer; }
 
-.Pokemon {
+.Card {
   max-width: 400px;
   text-align: center;
   margin: 0 auto;
   padding: 2rem 0; }
-  .Pokemon h1 {
+  .Card h1 {
     font-size: 1.4rem; }
-  .Pokemon__image {
+  .Card__msg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    font-size: 1.4rem;
+    color: #E24D51; }
+  .Card__image {
     background-color: #eee;
     border-radius: 4px; }
 

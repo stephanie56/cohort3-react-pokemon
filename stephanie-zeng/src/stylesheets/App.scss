@@ -2,6 +2,7 @@
 $theme-red: #E24D51;
 $theme-white: #eee;
 $theme-grey: #777;
+$theme-black: #333;
 
 body {
   font-family: Helvetica, 'Roboto', Arial, sans-serif;
@@ -60,6 +61,7 @@ img {
   max-width: 400px;
   text-align: center;
   margin: 0 auto;
+  padding: 2rem 0;
 
   h1 {
     font-size: 1.4rem;
@@ -68,5 +70,17 @@ img {
   &__image {
     background-color: $theme-white;
     border-radius: 4px;
+  }
+}
+
+.Footer {
+  margin: 0;
+  padding: 0.8rem;
+  text-align: center;
+  background-color: $theme-black;
+  color: #fff;
+  h3 {
+    font-size: 1rem;
+    font-weight: lighter;
   }
 }

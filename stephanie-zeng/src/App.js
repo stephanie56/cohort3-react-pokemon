@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { Header } from './components/Header';
 import { SearchField } from './components/SearchField';
 import { Button } from './components/Button';
-
 import { PokemonCard } from './components/PokemonCard';
+import { Footer } from './components/Footer';
 
 import pokeBall from './images/pokeball.png';
 
@@ -13,34 +13,30 @@ export default class App extends Component {
     super();
     this.state = {
       searchTerm: '',
-      pokeName: '' || 'No Pokémon Around',
-      pokeImage: '' || pokeBall
+      pokeName: 'No Pokémon Around',
+      pokeImage: pokeBall
     }
   }
 
   updateSearchTerm = (e) => {
-    console.log(e.target.value);
     this.setState({
       searchTerm: e.target.value
     });
   }
 
-  submitSearchTerm = (e) => {
-    e.preventDefault();
+  submitSearchTerm = () => {
     const pokemonName = this.state.searchTerm.toLowerCase();
     fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
     .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      const pokeName = data.name;
-      const pokeImage = data.sprites.front_default;
+    .then(pokemon => {
+      const pokeName = pokemon.name;
+      const pokeImage = pokemon.sprites.front_default;
       this.setState({
         pokeName,
         pokeImage
       });
     })
-    .catch(data => {
-      console.log(pokeBall);
+    .catch(err => {
       this.setState({
         pokeName: "Pokémon Not Found",
         pokeImage: pokeBall
@@ -60,6 +56,7 @@ export default class App extends Component {
           pokeName={this.state.pokeName}
           pokeImage={this.state.pokeImage}
         />
+      <Footer credit={"Gotta Fetch 'em All Assignment / Coded by Stephanie Zeng"}/>
       </div>
     );
   }

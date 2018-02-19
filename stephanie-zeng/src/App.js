@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
 import { Header } from './components/Header';
-import { SearchBar } from './components/SearchBar';
+import { SearchField } from './components/SearchField';
+import { Button } from './components/Button';
+
 import { PokemonCard } from './components/PokemonCard';
 
 import pokeBall from './images/pokeball.png';
@@ -11,8 +13,8 @@ export default class App extends Component {
     super();
     this.state = {
       searchTerm: '',
-      pokeName: '',
-      pokeImage: ''
+      pokeName: '' || 'No Pokémon Around',
+      pokeImage: '' || pokeBall
     }
   }
 
@@ -26,7 +28,7 @@ export default class App extends Component {
   submitSearchTerm = (e) => {
     e.preventDefault();
     const pokemonName = this.state.searchTerm.toLowerCase();
-    const data = fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
+    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
     .then(res => res.json())
     .then(data => {
       console.log(data);
@@ -40,7 +42,7 @@ export default class App extends Component {
     .catch(data => {
       console.log(pokeBall);
       this.setState({
-        pokeName: "Pokemon Not Found",
+        pokeName: "Pokémon Not Found",
         pokeImage: pokeBall
       });
     });
@@ -49,11 +51,11 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header title={"Gotta Fetch em all!"}/>
-        <SearchBar
-          updateSearchTerm={this.updateSearchTerm}
-          submitSearchTerm={this.submitSearchTerm}
-        />
+        <Header title={"Gotta Fetch 'em all!"}/>
+        <div className="SearchBar">
+          <SearchField updateSearchTerm={this.updateSearchTerm}/>
+          <Button submitSearchTerm={this.submitSearchTerm}/>
+        </div>
         <PokemonCard
           pokeName={this.state.pokeName}
           pokeImage={this.state.pokeImage}

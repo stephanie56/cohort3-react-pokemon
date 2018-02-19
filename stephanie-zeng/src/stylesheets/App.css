@@ -30,10 +30,12 @@ img {
     margin-right: 0.6rem;
     border-color: #777;
     border-width: 2px; }
-  .SearchBar input[type="submit"] {
+  .SearchBar button {
+    padding: 0.4rem;
+    outline: none;
     flex: 1;
     background-color: #E24D51;
-    color: #eee;
+    color: #fff;
     border-color: #E24D51;
     border-radius: 4px;
     cursor: pointer; }

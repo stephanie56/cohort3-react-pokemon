@@ -44,10 +44,12 @@ img {
     border-width: 2px;
   }
 
-  input[type="submit"]{
+  button {
+    padding: 0.4rem;
+    outline: none;
     flex: 1;
     background-color: $theme-red;
-    color: $theme-white;
+    color: #fff;
     border-color: $theme-red;
     border-radius: 4px;
     cursor: pointer;

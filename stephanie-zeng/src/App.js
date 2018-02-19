@@ -60,6 +60,7 @@ export default class App extends Component {
           pokeName={this.state.pokeName}
           pokeImage={this.state.pokeImage}
           isLoading={this.state.isLoading}
+          loadingMessage={"Searching for Pokémon Info..."}
         />
       <Footer credit={"Gotta Fetch 'em All Assignment / Coded by Stephanie Zeng"}/>
       </div>

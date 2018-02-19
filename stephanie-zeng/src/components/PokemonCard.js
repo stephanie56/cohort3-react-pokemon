@@ -1,30 +1,27 @@
 import React from 'react';
-import pokeBallImage from '../images/pokeball.png';
+import { capitalizeFirstLetter } from '../utils';
 
-const capitalizeFirstLetter = str => {
-  return typeof str === 'string' ? str.slice(0, 1).toUpperCase() + str.slice(1) : str;
+const LoadingIndicator = msg => <div className="Card__msg">{ msg }</div>;
+
+const Pokemon = (name, image) => {
+  return (
+    <div className="Card__pokemon">
+      <img className="Card__image"
+        src={ image }
+        alt={ name }
+      />
+    <h1>{ name }</h1>
+    </div>
+  );
 };
 
-export const PokemonCard = ({ pokeName, pokeImage, isLoading }) => {
-  const displayName = capitalizeFirstLetter(pokeName);
+export const PokemonCard = ({ pokeName, pokeImage, isLoading, loadingMessage }) => {
   return (
     <div className="Card">
       {
         isLoading ?
-        (
-          <div className="Card__msg">
-            Searching for Pokemon Info...
-          </div>
-        ) :
-        (
-          <div className="Card__pokemon">
-            <img className="Card__image"
-              src={ pokeImage }
-              alt={ displayName }
-            />
-            <h1>{ displayName }</h1>
-          </div>
-        )
+        LoadingIndicator(loadingMessage) :
+        Pokemon(capitalizeFirstLetter(pokeName), pokeImage)
       }
     </div>
   );

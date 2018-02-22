@@ -1,3 +1,3 @@
 import React from 'react';
 
-export const Button = ({ submitSearchTerm }) => <button onClick={submitSearchTerm}>Fetch a Pokémon</button>;
+export const Button = ({ children, submitSearchTerm }) => <button onClick={submitSearchTerm}>{children}</button>;

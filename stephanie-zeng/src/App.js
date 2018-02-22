@@ -8,6 +8,17 @@ import { Footer } from './components/Footer';
 
 import pokeBall from './images/pokeball.png';
 
+const PokeList = ({list}) => {
+  console.log('hello from the list', list);
+  return (
+    <ul className="PokeList">
+      {list.map(item => {
+        return <li>{item.name}</li>;
+      })}
+    </ul>
+  );
+}
+
 export default class App extends Component {
   constructor(){
     super();
@@ -15,8 +26,39 @@ export default class App extends Component {
       searchTerm: '',
       pokeName: 'No Pokémon Around',
       pokeImage: pokeBall,
+      pokeList: [],
       isLoading: false
     }
+  }
+
+  fetchPokemon = (name) => {
+    fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
+    .then(res => res.json())
+    .then(pokemon => {
+      console.log(pokemon);
+      if(pokemon.results){
+        this.setState({
+          pokeList: pokemon.results,
+          isLoading: false
+        });
+        console.log('the current state is...', this.state.pokeList);
+        // this.renderPokeList(this.state.pokeList);
+      } else {
+        const pokeName = pokemon.name;
+        const pokeImage = pokemon.sprites.front_default;
+        this.setState({
+          pokeName,
+          pokeImage,
+          isLoading: false
+        });
+      }
+    })
+    .catch(err => {
+      this.setState({
+        pokeName: "Pokémon Not Found",
+        isLoading: false
+      });
+    });
   }
 
   updateSearchTerm = (e) => {
@@ -28,24 +70,7 @@ export default class App extends Component {
   submitSearchTerm = () => {
     const pokemonName = this.state.searchTerm.toLowerCase();
     this.setState({ isLoading: true });
-    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
-    .then(res => res.json())
-    .then(pokemon => {
-      const pokeName = pokemon.name;
-      const pokeImage = pokemon.sprites.front_default;
-      this.setState({
-        pokeName,
-        pokeImage,
-        isLoading: false
-      });
-    })
-    .catch(err => {
-      this.setState({
-        pokeName: "Pokémon Not Found",
-        pokeImage: pokeBall,
-        isLoading: false
-      });
-    });
+    this.fetchPokemon(pokemonName);
   }
 
   render() {
@@ -53,15 +78,15 @@ export default class App extends Component {
       <div className="App">
         <Header title={"Gotta Fetch 'em all!"}/>
         <div className="SearchBar">
-          <SearchField updateSearchTerm={this.updateSearchTerm}/>
-          <Button submitSearchTerm={this.submitSearchTerm}/>
+          <SearchField inputValue={this.state.searchTerm} updateSearchTerm={this.updateSearchTerm}/>
+          <Button submitSearchTerm={this.submitSearchTerm}>Fetch a Pokemon</Button>
         </div>
-        <PokemonCard
-          pokeName={this.state.pokeName}
-          pokeImage={this.state.pokeImage}
-          isLoading={this.state.isLoading}
-          loadingMessage={"Searching for Pokémon Info..."}
-        />
+        {this.state.pokeList.length > 0 && <PokeList list={this.state.pokeList} />}
+        {this.state.pokeList.length === 0 &&
+          <PokemonCard
+            {...this.state}
+            loadingMessage={"Searching for Pokémon Info..."}
+          />}
       <Footer credit={"Gotta Fetch 'em All Assignment / Coded by Stephanie Zeng"}/>
       </div>
     );

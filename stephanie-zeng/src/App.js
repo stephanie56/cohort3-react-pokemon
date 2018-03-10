@@ -3,17 +3,17 @@ import React, { Component } from 'react';
 import { Header } from './components/Header';
 import { SearchField } from './components/SearchField';
 import { Button } from './components/Button';
-import { PokemonCard } from './components/PokemonCard';
+import { Pokemon, PokemonCard } from './components/PokemonCard';
 import { Footer } from './components/Footer';
 
 import pokeBall from './images/pokeball.png';
 
 const PokeList = ({list}) => {
-  console.log('hello from the list', list);
   return (
     <ul className="PokeList">
-      {list.map(item => {
-        return <li>{item.name}</li>;
+      {list.map(({name, image}) => {
+        console.log(image);
+        return <li key={name}><img src={image} />{name}</li>;
       })}
     </ul>
   );
@@ -37,12 +37,7 @@ export default class App extends Component {
     .then(pokemon => {
       console.log(pokemon);
       if(pokemon.results){
-        this.setState({
-          pokeList: pokemon.results,
-          isLoading: false
-        });
-        console.log('the current state is...', this.state.pokeList);
-        // this.renderPokeList(this.state.pokeList);
+        return pokemon.results;
       } else {
         const pokeName = pokemon.name;
         const pokeImage = pokemon.sprites.front_default;
@@ -52,6 +47,22 @@ export default class App extends Component {
           isLoading: false
         });
       }
+    })
+    .then(data => {
+      const pokemonList = data.map((pokemon) => {
+        fetch(pokemon.url)
+        .then(res => res.json())
+        .then(item => {
+           pokemon.image = item.sprites.front_default;
+        });
+        console.log(pokemon);
+        return pokemon;
+      });
+
+      this.setState({
+        pokeList: pokemonList,
+        isLoading: false
+      });
     })
     .catch(err => {
       this.setState({
@@ -69,11 +80,15 @@ export default class App extends Component {
 
   submitSearchTerm = () => {
     const pokemonName = this.state.searchTerm.toLowerCase();
-    this.setState({ isLoading: true });
+    this.setState({
+      pokeList: [],
+      isLoading: true
+    });
     this.fetchPokemon(pokemonName);
   }
 
   render() {
+    console.log(this.state.pokeList);
     return (
       <div className="App">
         <Header title={"Gotta Fetch 'em all!"}/>

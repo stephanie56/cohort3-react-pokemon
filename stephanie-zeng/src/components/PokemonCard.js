@@ -3,7 +3,7 @@ import { capitalizeFirstLetter } from '../utils';
 
 const LoadingIndicator = msg => <div className="Card__msg">{ msg }</div>;
 
-const Pokemon = (name, image) => {
+export const Pokemon = (name, image) => {
   return (
     <div className="Card__pokemon">
       <img className="Card__image"

@@ -5,7 +5,8 @@ const initialState = {
   pokeName: 'No Pokémon Around',
   pokeImage: pokeBall,
   pokeList: [],
-  isLoading: false
+  isLoading: false,
+  loadingMessage: ''
 }
 
 export const reducer = (state = initialState, action) => {

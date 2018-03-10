@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Header } from './components/Header';
 import { SearchField } from './components/SearchField';
 import { Button } from './components/Button';
-import { Pokemon, PokemonCard } from './components/PokemonCard';
+import PokemonCard from './containers/PokemonCard';
 import { PokeList } from './components/PokeList';
 import { Footer } from './components/Footer';
 

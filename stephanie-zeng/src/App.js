@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Header } from './components/Header';
-import { SearchField } from './components/SearchField';
-import { Button } from './components/Button';
+import SearchBar from './containers/SearchBar';
 import PokemonCard from './containers/PokemonCard';
 import { PokeList } from './components/PokeList';
 import { Footer } from './components/Footer';
@@ -14,6 +13,7 @@ const App = ({ pokeList }) => {
     return (
       <div className="App">
         <Header title={"Gotta Fetch 'em all!"}/>
+        <SearchBar />
         {pokeList.length > 0 && <PokeList list={pokeList} />}
         {pokeList.length === 0 &&
           <PokemonCard />

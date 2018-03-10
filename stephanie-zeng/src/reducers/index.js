@@ -1,6 +1,7 @@
+import {ACTION_TYPES} from '../actions';
 import pokeBall from '../images/pokeball.png';
 
-const initialState = {
+const INITIAL_STATE = {
   searchTerm: '',
   pokeName: 'No Pokémon Around',
   pokeImage: pokeBall,
@@ -9,8 +10,10 @@ const initialState = {
   loadingMessage: ''
 }
 
-export const reducer = (state = initialState, action) => {
-  switch (action.type) {
+export const reducer = (state = INITIAL_STATE, {type, payload}) => {
+  switch (type) {
+    case ACTION_TYPES.updateSearchTerm:
+      return {...state, searchTerm: payload};
     default:
       return state;
   }

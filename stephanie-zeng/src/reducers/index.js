@@ -15,8 +15,7 @@ export const reducer = (state = INITIAL_STATE, {type, payload}) => {
     case ACTION_TYPES.updateSearchTerm:
       return {...state, searchTerm: payload};
     case ACTION_TYPES.submitSearchTerm:
-      console.log(payload);
-      // return {...state, pokeList.concat(payload)};
+      return {...state, pokeName: payload.pokeName, pokeImage: payload.pokeImage};
     default:
       return state;
   }

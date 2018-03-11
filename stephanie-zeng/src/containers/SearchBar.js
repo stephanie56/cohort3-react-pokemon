@@ -6,7 +6,7 @@ import { Button } from '../components/Button';
 
 import {updateSearchTerm, getPokemon} from '../actions/';
 
-const SearchBar = ({searchTerm, updateSearchTerm, submitSearchTerm}) => {
+const SearchBar = ({searchTerm, updateSearchTerm, getPokemon}) => {
   return (
     <div className="SearchBar">
       <SearchField

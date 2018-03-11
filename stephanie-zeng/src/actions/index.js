@@ -11,13 +11,18 @@ export const updateSearchTerm = (val) => ({
 export const getPokemon = () => {
   return (dispatch, getState) => {
     const { searchTerm } = getState();
-    fetch(`https://pokeapi.co/api/v2/pokemon/pikachu`)
+    console.log(searchTerm);
+    fetch(`https://pokeapi.co/api/v2/pokemon/${searchTerm}`)
     .then(res => res.json())
     .then(pokemon => {
-      console.log('fetching');
+      const pokeName = pokemon.name;
+      const pokeImage = pokemon.sprites.front_default;
       dispatch({
       type: ACTION_TYPES.submitSearchTerm,
-      payload: pokemon.results
+      payload: {
+        pokeName,
+        pokeImage
+      }
     })})
     .catch(err => {
       console.log(err);

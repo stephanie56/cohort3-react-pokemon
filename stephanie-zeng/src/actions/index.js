@@ -8,6 +8,19 @@ export const updateSearchTerm = (val) => ({
   payload: val
 });
 
-export const submitSearchTerm = () => ({
-  type: ACTION_TYPES.submitSearchTerm
-});
+export const getPokemon = () => {
+  return (dispatch, getState) => {
+    const { searchTerm } = getState();
+    fetch(`https://pokeapi.co/api/v2/pokemon/pikachu`)
+    .then(res => res.json())
+    .then(pokemon => {
+      console.log('fetching');
+      dispatch({
+      type: ACTION_TYPES.submitSearchTerm,
+      payload: pokemon.results
+    })})
+    .catch(err => {
+      console.log(err);
+    });
+  };
+};

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { SearchField } from '../components/SearchField';
 import { Button } from '../components/Button';
 
-import {updateSearchTerm, submitSearchTerm} from '../actions/';
+import {updateSearchTerm, getPokemon} from '../actions/';
 
 const SearchBar = ({searchTerm, updateSearchTerm, submitSearchTerm}) => {
   return (
@@ -12,7 +12,7 @@ const SearchBar = ({searchTerm, updateSearchTerm, submitSearchTerm}) => {
       <SearchField
         inputValue={searchTerm} updateSearchTerm={(e) => updateSearchTerm(e.target.value)}
       />
-      <Button submitSearchTerm={submitSearchTerm}>Fetch a Pokemon</Button>
+    <Button submitSearchTerm={getPokemon}>Fetch a Pokemon</Button>
     </div>
   );
 };
@@ -22,7 +22,7 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = {
   updateSearchTerm,
-  submitSearchTerm
+  getPokemon
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

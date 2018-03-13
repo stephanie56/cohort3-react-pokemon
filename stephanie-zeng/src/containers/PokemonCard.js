@@ -10,7 +10,7 @@ const PokemonCard = ({ pokeName, pokeImage, isLoading, loadingMessage }) => {
     <div className="Card">
       {
         isLoading ?
-        LoadingIndicator(loadingMessage) :
+        LoadingIndicator('Fetching Pokemon...') :
         Pokemon(capitalizeFirstLetter(pokeName), pokeImage)
       }
     </div>

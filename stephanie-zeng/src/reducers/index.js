@@ -7,15 +7,18 @@ const INITIAL_STATE = {
   pokeImage: pokeBall,
   pokeList: [],
   isLoading: false,
-  loadingMessage: ''
 }
 
 export const reducer = (state = INITIAL_STATE, {type, payload}) => {
   switch (type) {
     case ACTION_TYPES.updateSearchTerm:
       return {...state, searchTerm: payload};
-    case ACTION_TYPES.submitSearchTerm:
-      return {...state, pokeName: payload.pokeName, pokeImage: payload.pokeImage};
+    case ACTION_TYPES.loadingPokemon:
+      return {...state, isLoading: payload};
+    case ACTION_TYPES.getPokemonSuccess:
+      return {...state, pokeName: payload.name, pokeImage: payload.image};
+    case ACTION_TYPES.getPokemonError:
+      return {...state, pokeName: payload};
     default:
       return state;
   }
